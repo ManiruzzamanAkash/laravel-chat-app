@@ -11,7 +11,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class MessageSent implements ShouldBroadcastNow
+class GroupChatMessage implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -34,6 +34,6 @@ class MessageSent implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('messenger');
+        return new PresenceChannel('group_chat.' . $this->message->group_id);
     }
 }
