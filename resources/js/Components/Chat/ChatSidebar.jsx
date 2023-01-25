@@ -16,18 +16,18 @@ export default function ChatSidebar() {
                 </div>
             </div>
 
-            <div class="user-list h-screen overflow-y-auto">
-                <div class="flex px-5 py-3 transition hover:cursor-pointer hover:bg-slate-100">
-                    <div class="pr-4">
+            <div className="user-list h-screen overflow-y-auto">
+                <div className="flex px-5 py-3 transition hover:cursor-pointer hover:bg-slate-100">
+                    <div className="pr-4">
                         <img src="https://cdn-icons-png.flaticon.com/512/194/194938.png" width="50" />
                     </div>
 
                     <div>
-                        <h3 class="text-md text-violet-500">Lupe Fiasco</h3>
-                        <p class="h-5 overflow-hidden text-sm font-light text-gray-400">I got two ticket to go see the awesome hskdkshkdjsd</p>
+                        <h3 className="text-md text-violet-500">Lupe Fiasco</h3>
+                        <p className="h-5 overflow-hidden text-sm font-light text-gray-400">I got two ticket to go see the awesome hskdkshkdjsd</p>
                     </div>
                 </div>
-                <div class="flex px-5 py-3 transition hover:cursor-pointer hover:bg-slate-100">
+                <div className="flex px-5 py-3 transition hover:cursor-pointer hover:bg-slate-100">
                     <div className="pr-4">
                         <img src="https://cdn-icons-png.flaticon.com/512/194/194938.png" width="50" />
                     </div>

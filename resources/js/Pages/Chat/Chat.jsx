@@ -6,6 +6,7 @@ import ChatUserInfoHeader from '@/Components/Chat/ChatUserInfoHeader';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
 export default function Chat(props) {
+    console.log(props);
     return (
         <AuthenticatedLayout
             auth={props.auth}
