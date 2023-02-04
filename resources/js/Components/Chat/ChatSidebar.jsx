@@ -1,4 +1,4 @@
-export default function ChatSidebar() {
+export default function ChatSidebar({ recentMessages }) {
     return (
         <>
             <div className="search-box h-10 text-slate-300">
@@ -17,36 +17,30 @@ export default function ChatSidebar() {
             </div>
 
             <div className="user-list h-screen overflow-y-auto">
-                <div className="flex px-5 py-3 transition hover:cursor-pointer hover:bg-slate-100">
-                    <div className="pr-4">
-                        <img src="https://cdn-icons-png.flaticon.com/512/194/194938.png" width="50" />
-                    </div>
+                {
+                    recentMessages.map((user, index) => (
+                        <div key={index} className="flex px-5 py-3 transition hover:cursor-pointer hover:bg-slate-100">
+                            <div className="pr-4">
+                                {
+                                    user?.avatar !== undefined ?
+                                        <img src="https://cdn-icons-png.flaticon.com/512/194/194938.png" width="50" />
+                                        :
+                                        <i className="fa fa-user-circle text-gray-300 text-5xl"></i>
+                                }
+                            </div>
 
-                    <div>
-                        <h3 className="text-md text-violet-500">Lupe Fiasco</h3>
-                        <p className="h-5 overflow-hidden text-sm font-light text-gray-400">I got two ticket to go see the awesome hskdkshkdjsd</p>
-                    </div>
-                </div>
-                <div className="flex px-5 py-3 transition hover:cursor-pointer hover:bg-slate-100">
-                    <div className="pr-4">
-                        <img src="https://cdn-icons-png.flaticon.com/512/194/194938.png" width="50" />
-                    </div>
+                            <div>
+                                <h3 className="text-md text-violet-500">
+                                    {user.name.length > 0 ? user.name : 'N/A'}
+                                </h3>
+                                <p className="h-5 overflow-hidden text-sm font-light text-gray-400">
+                                    {user.message}
+                                </p>
+                            </div>
+                        </div>
+                    ))
+                }
 
-                    <div>
-                        <h3 className="text-md text-violet-500">Lupe Fiasco</h3>
-                        <p className="h-5 overflow-hidden text-sm font-light text-gray-400">I got two ticket to go see the awesome hskdkshkdjsd</p>
-                    </div>
-                </div>
-                <div className="flex px-5 py-3 transition hover:cursor-pointer hover:bg-slate-100">
-                    <div className="pr-4">
-                        <img src="https://cdn-icons-png.flaticon.com/512/194/194938.png" width="50" />
-                    </div>
-
-                    <div>
-                        <h3 className="text-md text-violet-500">Lupe Fiasco</h3>
-                        <p className="h-5 overflow-hidden text-sm font-light text-gray-400">I got two ticket to go see the awesome hskdkshkdjsd</p>
-                    </div>
-                </div>
             </div>
         </>
     );
