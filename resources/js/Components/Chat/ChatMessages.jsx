@@ -1,31 +1,30 @@
-export default function ChatMessages() {
+import { Fragment } from "react";
+
+export default function ChatMessages({ messages, ...props }) {
+    const isReceivedChat = (message) => {
+        return message?.receiver_id === props?.auth?.user?.id;
+    };
+
     return (
         <>
-            <div className="receive-chat relative flex justify-start">
-                <div className="mb-2 max-w-[80%] rounded bg-violet-400 px-5 py-2 text-sm text-white">
-                    <i className="fa fa-caret-up absolute -top-2 text-violet-400"></i>
-                    <p>I got two tickets to go to see this awesome band called, Lorem ipsum dollar !! Do you want to come ?</p>
-                </div>
-            </div>
-
-            <div className="receive-chat relative flex justify-start">
-                <div className="mb-2 max-w-[80%] rounded bg-violet-400 px-5 py-2 text-sm text-white">
-                    <p>I got two tickets to go to see this awesome band called, Lorem ipsum dollar !! Do you want to come ?</p>
-                </div>
-            </div>
-
-            <div className="send-chat relative flex justify-end">
-                <div className="mb-2 max-w-[80%] rounded bg-violet-200 px-5 py-2 text-sm text-slate-500">
-                    <p>I got two tickets to go to see this awesome band called, Lorem ipsum dollar !! Do you want to come ?</p>
-                </div>
-            </div>
-
-            <div className="send-chat relative flex justify-end">
-                <div className="mb-2 max-w-[80%] rounded bg-violet-200 px-5 py-3 text-sm text-slate-500">
-                    <i className="fa fa-caret-down absolute bottom-0 right-4 text-violet-200"></i>
-                    <p>I got two tickets to go to see this awesome band called, Lorem ipsum dollar !! Do you want to come ?</p>
-                </div>
-            </div>
+            {messages.map((message, index) => (
+                <Fragment key={index}>
+                    {isReceivedChat(message) ? (
+                        <div className="receive-chat relative flex justify-start">
+                            <div className="mb-2 max-w-[80%] rounded bg-violet-400 px-5 py-2 text-sm text-white">
+                                <i className="fa fa-caret-up absolute -top-2 text-violet-400"></i>
+                                <p>{message?.message}</p>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="send-chat relative flex justify-end">
+                            <div className="mb-2 max-w-[80%] rounded bg-violet-200 px-5 py-2 text-sm text-slate-500">
+                                <p>{message?.message}</p>
+                            </div>
+                        </div>
+                    )}
+                </Fragment>
+            ))}
         </>
-    )
+    );
 }
