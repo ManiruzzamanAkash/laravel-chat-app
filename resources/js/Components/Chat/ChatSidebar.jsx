@@ -1,3 +1,5 @@
+import { Link } from '@inertiajs/inertia-react';
+
 export default function ChatSidebar({ recentMessages }) {
     return (
         <>
@@ -19,7 +21,11 @@ export default function ChatSidebar({ recentMessages }) {
             <div className="user-list h-screen overflow-y-auto">
                 {
                     recentMessages.map((user, index) => (
-                        <div key={index} className="flex px-5 py-3 transition hover:cursor-pointer hover:bg-slate-100">
+                        <Link
+                            key={index}
+                            className="flex px-5 py-3 transition hover:cursor-pointer hover:bg-slate-100"
+                            href={`/chat/${user?.user_id}`}
+                        >
                             <div className="pr-4">
                                 {
                                     user?.avatar !== undefined ?
@@ -37,7 +43,7 @@ export default function ChatSidebar({ recentMessages }) {
                                     {user.message}
                                 </p>
                             </div>
-                        </div>
+                        </Link>
                     ))
                 }
 
