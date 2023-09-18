@@ -1,31 +1,37 @@
-export default function ChatMessages() {
+import { Fragment } from "react";
+
+export default function ChatMessages({ messages, auth_id }) {
+    const isReceivedMessage = (message) => {
+        return message.receiver_id === auth_id;
+    };
+
     return (
         <>
-            <div className="receive-chat relative flex justify-start">
-                <div className="mb-2 max-w-[80%] rounded bg-violet-400 px-5 py-2 text-sm text-white">
-                    <i className="fa fa-caret-up absolute -top-2 text-violet-400"></i>
-                    <p>I got two tickets to go to see this awesome band called, Lorem ipsum dollar !! Do you want to come ?</p>
-                </div>
-            </div>
-
-            <div className="receive-chat relative flex justify-start">
-                <div className="mb-2 max-w-[80%] rounded bg-violet-400 px-5 py-2 text-sm text-white">
-                    <p>I got two tickets to go to see this awesome band called, Lorem ipsum dollar !! Do you want to come ?</p>
-                </div>
-            </div>
-
-            <div className="send-chat relative flex justify-end">
-                <div className="mb-2 max-w-[80%] rounded bg-violet-200 px-5 py-2 text-sm text-slate-500">
-                    <p>I got two tickets to go to see this awesome band called, Lorem ipsum dollar !! Do you want to come ?</p>
-                </div>
-            </div>
-
-            <div className="send-chat relative flex justify-end">
-                <div className="mb-2 max-w-[80%] rounded bg-violet-200 px-5 py-3 text-sm text-slate-500">
-                    <i className="fa fa-caret-down absolute bottom-0 right-4 text-violet-200"></i>
-                    <p>I got two tickets to go to see this awesome band called, Lorem ipsum dollar !! Do you want to come ?</p>
-                </div>
-            </div>
+            {(messages || []).map((message, index) => (
+                <Fragment key={index}>
+                    <div
+                        className={`${
+                            isReceivedMessage(message)
+                                ? "receive-chat justify-start"
+                                : "send-chat justify-end"
+                        } relative flex`}
+                    >
+                        <div
+                            className={`mb-2 max-w-[80%] rounded ${
+                                isReceivedMessage(message)
+                                    ? "bg-violet-400"
+                                    : "bg-violet-200"
+                            } px-5 py-2 text-sm ${
+                                isReceivedMessage(message)
+                                    ? "text-white"
+                                    : "text-slate-500"
+                            }`}
+                        >
+                            <p>{message?.message}</p>
+                        </div>
+                    </div>
+                </Fragment>
+            ))}
         </>
-    )
+    );
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\MessageSent;
+use App\Models\User;
 use App\Repositories\ChatRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -10,7 +11,8 @@ use Inertia\Inertia;
 
 class ChatController extends Controller
 {
-    public function __construct(private ChatRepository $chat) {
+    public function __construct(private ChatRepository $chat)
+    {
         $this->chat = $chat;
     }
 
@@ -21,11 +23,12 @@ class ChatController extends Controller
      */
     public function index(Request $request, ?int $receiverId = null)
     {
-        $messages = empty($receiverId) ? [] : $this->chat->getUserMessages($request->user()->id, $receiverId);
+        $messages = empty($receiverId) ? [] : $this->chat->getUserMessages((int) $request->user()->id, (int) $receiverId);
 
         return Inertia::render('Chat/Chat', [
             'messages' => $messages,
-            'recentMessages' => $this->chat->getRecentUsersWithMessage($request->user()->id)
+            'recentMessages' => $this->chat->getRecentUsersWithMessage($request->user()->id),
+            'receiver' => User::find($receiverId),
         ]);
     }
 
